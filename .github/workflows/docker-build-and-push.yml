@@ -33,7 +33,12 @@ jobs:
 
       - name: Run tests
         run: |
-          PYTHONPATH=./src_loan MODEL_PATH=./models/pipeline.pkl python -m pytest test_loan -v
+          PYTHONPATH=./src_loan \
+          MODEL_PATH=./models/pipeline.pkl \
+          KEYCLOAK_URL=https://keycloak:8443 \
+          CLIENT_ID=inference-client \
+          CLIENT_SECRET=dummy_secret \
+          python -m pytest test_loan -v
 
   push-image-to-docker-hub:
     name: Build and push images
